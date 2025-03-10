@@ -1,13 +1,14 @@
 export interface InputDetails
 {
     InputType: InputTypes;
-    Value: string | number | Date ;
+    Value: string | number | Date | any | any[];
     Name: string;
     Id: string;
     Label: string;
     Required: InputRequired;
     Validation: any;
     DataSource?: InputValues[];
+    IsKey: boolean;
 }
 
 export enum InputTypes{
@@ -15,7 +16,9 @@ export enum InputTypes{
     Passsword,
     Dropdown,
     TextArea,
-    Date
+    Date,
+    Checkbox,
+    Hidden
 }
 
 export  interface InputValues{

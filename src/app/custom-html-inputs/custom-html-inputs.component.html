@@ -1,31 +1,82 @@
+<div class="mb-3" *ngIf="checkInput('0')">
+  <label for="{{ inputDetails?.Name }}" class="form-label">{{
+    inputDetails?.Label
+  }}</label>
+  <input
+    type="text"
+    class="form-control"
+    id="{{ inputDetails?.Id }}"
+    placeholder=""
+    value="{{ inputDetails?.Value }}"
+    name="{{ inputDetails?.Name }}"
+    (keyup)="onChange($event)"
+    required="{{ inputDetails?.Required?.IsRequired ? 'required' : '' }}"
+  />
+  <!-- <div class="invalid-feedback">
+      Valid first name is required.
+    </div> -->
+</div>
+<div class="mb-3" *ngIf="checkInput('1')">
+  <!--password-->
+  <label for="{{ inputDetails?.Name }}" class="form-label">{{
+    inputDetails?.Label
+  }}</label>
+  <input
+    type="password"
+    class="form-control"
+    id="{{ inputDetails?.Id }}"
+    placeholder=""
+    value="{{ inputDetails?.Value }}"
+    name="{{ inputDetails?.Name }}"
+    (keyup)="onChange($event)"
+    required="{{ inputDetails?.Required?.IsRequired ? 'required' : '' }}"
+  />
+  <!-- <div class="invalid-feedback">
+      Valid first name is required.
+    </div> -->
+</div>
+<div class="mb-3" *ngIf="checkInput('2')">
+  <!--dropdown-->
+  <label for="{{ inputDetails?.Name }}" class="form-label">
+    {{ inputDetails?.Label }}
+  </label>
+  <select
+    class="form-select"
+    id="{{ inputDetails?.Id }}"
+    name="{{ inputDetails?.Name }}"
+    (change)="onChange($event)"
+  >
+    <option [selected]="!inputDetails?.Value">Please select an item</option>
+    <option *ngFor="let item of inputDetails?.DataSource" 
+      [value]="item.Id" [selected]="item.Id.toString() == inputDetails?.Value?.toString()">
+      {{ item.Value }}
+    </option>
+  </select>
+  <!-- <div class="invalid-feedback">
+      Valid first name is required.
+    </div> -->
+</div>
+<div class="mb-3" *ngIf="checkInput('5')">
+  <!--checkbox-->
+  <label for="{{ inputDetails?.Name }}" class="form-label">{{
+    inputDetails?.Label
+  }}</label>
+  <div>
+    <div *ngFor="let item of inputDetails?.DataSource"  class="mb-3">
+      <input class="form-check-input" 
+        type="checkbox"
+        name="checkbox_{{ item.Id }}"
+        id="checkbox_{{ item.Id }}"
+        value="{{ item.Id }}"
+        [checked]="checkedExists(item.Id)"
+        (click)="onChange($event)"
+      />
+      <label class="form-check-label"  for="checkbox_{{ item.Id }}"> {{ item.Value }}</label>
+    </div>
+  </div>
 
+  <!-- <div class="invalid-feedback">
+    Valid first name is required.
+  </div> -->
+</div>
 
-<div class="col-sm-6" *ngIf="checkInput('0')">
-    <label for="{{inputDetails?.Name}}" class="form-label">{{inputDetails?.Label}}</label>
-    <input type="text" class="form-control" id="{{inputDetails?.Id}}" placeholder="" value="{{inputDetails?.Value}}" 
-    name="{{inputDetails?.Name}}" 
-    required="{{inputDetails?.Required?.IsRequired ? 'required' : ''}}"
-    >
-    <!-- <div class="invalid-feedback">
-      Valid first name is required.
-    </div> -->
-</div>
-<div class="col-sm-6" *ngIf="checkInput('1')"><!--password-->
-    <label for="{{inputDetails?.Name}}" class="form-label">{{inputDetails?.Label}}</label>
-    <input type="password" class="form-control" id="{{inputDetails?.Id}}" placeholder="" value="{{inputDetails?.Value}}" 
-    name="{{inputDetails?.Name}}" 
-    required="{{inputDetails?.Required?.IsRequired ? 'required' : ''}}"
-    >
-    <!-- <div class="invalid-feedback">
-      Valid first name is required.
-    </div> -->
-</div>
-<div class="col-sm-6" *ngIf="checkInput('2')"><!--dropdown-->
-    <label for="{{inputDetails?.Name}}" class="form-label">{{inputDetails?.Label}}</label>
-    <select (select)="inputDetails?.Value" class="form-control" id="{{inputDetails?.Id}}" name="{{inputDetails?.Name}}" >
-        <option *ngFor="let item of inputDetails?.DataSource" [value]="item.Id">{{item.Value}}</option>
-    </select>
-    <!-- <div class="invalid-feedback">
-      Valid first name is required.
-    </div> -->
-</div>
